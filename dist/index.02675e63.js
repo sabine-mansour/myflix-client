@@ -26309,9 +26309,9 @@ try {
         selectedMovie: null
       };
     }
-    setSelectedMovie(newSelectMovie) {
+    setSelectedMovie(newSelectedMovie) {
       this.setState({
-        selectedMovie: newSelectMovie
+        selectedMovie: newSelectedMovie
       });
     }
     render() {
@@ -26338,8 +26338,8 @@ try {
           }
         }, selectedMovie ? /*#__PURE__*/_reactDefault.default.createElement(_movieViewMovieView.MovieView, {
           movie: selectedMovie,
-          onBackClick: newSelectMovie => {
-            this.setSelectedMovie(newSelectMovie);
+          onBackClick: newSelectedMovie => {
+            this.setSelectedMovie(newSelectedMovie);
           },
           __self: this,
           __source: {
@@ -26351,7 +26351,7 @@ try {
           key: movie._id,
           movie: movie,
           onMovieClick: movie => {
-            this.setSelectMovie(movie);
+            this.setSelectedMovie(movie);
           },
           __self: this,
           __source: {
