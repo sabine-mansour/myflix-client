@@ -31,8 +31,9 @@ export function RegistrationView(props) {
       </label>
       <label>
         Birthday:
-       <input type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+       <input type="text" value={birthday} onChange={e => setBirthday(e.target.value)} />
       </label>
+      <button type="register" onClick={handleRegister}>Register</button>
     </form>
   );
 }
@@ -42,7 +43,7 @@ RegistrationView.PropTypes = {
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.date
+    Birthday: PropTypes.string
   }),
   onRegister: PropTypes.func,
 };
