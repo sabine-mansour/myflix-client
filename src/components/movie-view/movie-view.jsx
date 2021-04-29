@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import Proptypes from 'prop-types';
 
 import "./movie-view.scss";
 
@@ -25,21 +25,21 @@ export class MovieView extends React.Component {
   }
 }
 
-MovieView.PropTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
+MovieView.Proptypes = {
+  movie: Proptypes.shape({
+    Title: Proptypes.string.isRequired,
+    Description: Proptypes.string.isRequired,
+    ImagePath: Proptypes.string.isRequired,
+    Genre: Proptypes.shape({
+      Name: Proptypes.string.isRequired,
+      Description: Proptypes.string.isRequired
     }),
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
-      Death: PropTypes.string
+    Director: Proptypes.shape({
+      Name: Proptypes.string.isRequired,
+      Bio: Proptypes.string.isRequired,
+      Birth: Proptypes.string.isRequired,
+      Death: Proptypes.string
     }),
   }).isRequired,
-  onBackClick: PropTypes.func.isRequired
+  onBackClick: Proptypes.func.isRequired
 };
