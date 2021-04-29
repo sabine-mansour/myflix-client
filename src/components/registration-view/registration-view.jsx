@@ -18,6 +18,11 @@ export function RegistrationView(props) {
     props.onRegister(username);
   }
 
+  const toggleRegister = (e) => {
+    e.preventDefault();
+    props.toggleRegister();
+  };
+
   return (
     <Form>
       <Form.Group controlId="registerUsername">
@@ -41,16 +46,18 @@ export function RegistrationView(props) {
       </Form.Group>
 
       <Button variant="primary" type="submit" onClick={handleRegister}>Register</Button>
+      <Button variant="outline-primary" onClick={toggleRegister}>Already Registered? Log In</Button>
     </Form>
   );
 }
 
 RegistrationView.Proptypes = {
   register: Proptypes.shape({
-    Username: Proptypes.string.isRequired,
-    Password: Proptypes.string.isRequired,
-    Email: Proptypes.string.isRequired,
+    Username: Proptypes.string,
+    Password: Proptypes.string,
+    Email: Proptypes.string,
     Birthday: Proptypes.string
   }),
   onRegister: Proptypes.func,
+  toggleRegister: Proptypes.func
 };

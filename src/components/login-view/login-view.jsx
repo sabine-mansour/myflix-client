@@ -15,6 +15,11 @@ export function LoginView(props) {
     props.onLoggedIn(username);
   };
 
+  const toggleRegister = (e) => {
+    e.preventDefault();
+    props.toggleRegister();
+  };
+
   return (
 
     <Form>
@@ -28,6 +33,7 @@ export function LoginView(props) {
         <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
       </Form.Group>
       <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+      <Button variant="outline-primary" onClick={toggleRegister}>Not Registered? Register</Button>
     </Form>
 
   );
@@ -35,8 +41,9 @@ export function LoginView(props) {
 
 LoginView.Proptypes = {
   user: Proptypes.shape({
-    Username: Proptypes.string.isRequired,
-    Password: Proptypes.string.isRequired
+    Username: Proptypes.string,
+    Password: Proptypes.string
   }),
-  onLoggedIn: Proptypes.func
+  onLoggedIn: Proptypes.func,
+  toggleRegister: Proptypes.func
 };

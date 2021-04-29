@@ -18,7 +18,8 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
-      register: null
+      register: null,
+      registered: null
     };
   }
 
@@ -50,6 +51,12 @@ export class MainView extends React.Component {
     });
   }
 
+  toggleRegister(user) {
+    this.setState({
+      register: !this.state.register
+    })
+  }
+
   render() {
     const { movies, selectedMovie, user, register } = this.state;
 
@@ -57,7 +64,7 @@ export class MainView extends React.Component {
       (
         <Row className="justify-content-md-center">
           <Col md={6}>
-            <RegistrationView onRegister={register => this.onRegister(register)} />
+            <RegistrationView onRegister={register => this.onRegister(register)} toggleRegister={user => this.toggleRegister(user)} />
           </Col>
         </Row>
       )
@@ -67,7 +74,7 @@ export class MainView extends React.Component {
       (
         <Row className="justify-content-md-center">
           <Col md={6}>
-            <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+            <LoginView onLoggedIn={user => this.onLoggedIn(user)} toggleRegister={user => this.toggleRegister(user)} />
           </Col>
         </Row>
       )
