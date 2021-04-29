@@ -26326,26 +26326,26 @@ try {
       });
     }
     render() {
-      const {movies, selectedMovie} = this.state;
-      if (!this.state.user) return (
+      const {movies, selectedMovie, user, register} = this.state;
+      if (!user) return (
         /*#__PURE__*/_reactDefault.default.createElement(_loginViewLoginView.LoginView, {
           onLoggedIn: user => this.onLoggedIn(user),
           __self: this,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 54,
-            columnNumber: 34
+            columnNumber: 23
           }
         })
       );
-      if (!this.state.register) return (
+      if (!register) return (
         /*#__PURE__*/_reactDefault.default.createElement(_registrationViewRegistrationView.RegistrationView, {
           onRegister: register => this.onRegister(register),
           __self: this,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 56,
-            columnNumber: 38
+            columnNumber: 27
           }
         })
       );
