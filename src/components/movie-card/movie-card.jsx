@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import Proptypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
@@ -21,9 +21,9 @@ export class MovieCard extends React.Component {
   }
 }
 
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string
+MovieCard.proptypes = {
+  movie: Proptypes.shape({
+    Title: Proptypes.string
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onMovieClick: Proptypes.func.isRequired
 };
