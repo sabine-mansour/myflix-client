@@ -24,13 +24,13 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://flixinfo.herokuapp.com/movies').then(response => {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
       this.setState({
-        movies: response.data
+        user: localStorage.getItem('user')
       });
-    }).catch(error => {
-      console.log(error);
-    });
+      this.getMovies(accessToken);
+    }
   }
 
   setSelectedMovie(newSelectedMovie) {
@@ -39,9 +39,26 @@ export class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
+  getMovies(token) {
+    axios.get('https://flixinfo.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      this.setState({
+        movies: response.data
+      });
+    }).catch(function (error) {
+      console.log(error);
     });
   }
 
@@ -60,21 +77,22 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user, register } = this.state;
 
-    if (!register) return (
-      (
-        <Row className="justify-content-md-center">
-          <Col md={6}>
-            <RegistrationView onRegister={register => this.onRegister(register)} toggleRegister={user => this.toggleRegister(user)} />
-          </Col>
-        </Row>
-      )
-    );
 
     if (!user) return (
       (
         <Row className="justify-content-md-center">
           <Col md={6}>
             <LoginView onLoggedIn={user => this.onLoggedIn(user)} toggleRegister={user => this.toggleRegister(user)} />
+          </Col>
+        </Row>
+      )
+    );
+
+    if (!register) return (
+      (
+        <Row className="justify-content-md-center">
+          <Col md={6}>
+            <RegistrationView onRegister={register => this.onRegister(register)} toggleRegister={user => this.toggleRegister(user)} />
           </Col>
         </Row>
       )

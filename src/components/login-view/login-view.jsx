@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Proptypes from 'prop-types';
+import axios from 'axios';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+
 
 import "./login-view.scss";
 
@@ -12,7 +14,15 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password);
-    props.onLoggedIn(username);
+    axios.post('https://flixinfo.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    }).then(response => {
+      const data = response.data;
+      props.onLoggedIn(data);
+    }).catch(e => {
+      console.log('no such user')
+    });
   };
 
   const toggleRegister = (e) => {
