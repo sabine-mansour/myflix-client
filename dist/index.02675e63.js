@@ -34942,7 +34942,7 @@ try {
             lineNumber: 12,
             columnNumber: 11
           }
-        }, director.Director.Name)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        }, director.Name)), /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "director-bio",
           __self: this,
           __source: {
@@ -34966,7 +34966,7 @@ try {
             lineNumber: 16,
             columnNumber: 11
           }
-        }, director.Director.Bio)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        }, director.Bio)), /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "director-birth",
           __self: this,
           __source: {
@@ -34990,7 +34990,7 @@ try {
             lineNumber: 20,
             columnNumber: 11
           }
-        }, director.Director.Birth)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        }, director.Birth)), /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "director-death",
           __self: this,
           __source: {
@@ -35014,7 +35014,7 @@ try {
             lineNumber: 24,
             columnNumber: 11
           }
-        }, director.Director.Death)), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
+        }, director.Death)), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
           variant: "secondary",
           onClick: () => {
             onBackClick(null);
@@ -35087,7 +35087,7 @@ try {
             lineNumber: 12,
             columnNumber: 11
           }
-        }, genre.Genre.Name)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        }, genre.Name)), /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "genre-description",
           __self: this,
           __source: {
@@ -35111,7 +35111,7 @@ try {
             lineNumber: 16,
             columnNumber: 11
           }
-        }, genre.Genre.Description)), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
+        }, genre.Description)), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
           variant: "secondary",
           onClick: () => {
             onBackClick(null);
