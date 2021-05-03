@@ -3,6 +3,7 @@ import Proptypes from 'prop-types';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 
 import "./login-view.scss";
@@ -25,11 +26,6 @@ export function LoginView(props) {
     });
   };
 
-  const toggleRegister = (e) => {
-    e.preventDefault();
-    props.toggleRegister();
-  };
-
   return (
 
     <Form>
@@ -43,7 +39,9 @@ export function LoginView(props) {
         <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
       </Form.Group>
       <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-      <Button variant="outline-primary" onClick={toggleRegister}>Not Registered? Register</Button>
+      <Link to={`/register`}>
+        <Button variant="outline-primary" >Not Registered? Register</Button>
+      </Link>
     </Form>
 
   );
@@ -54,6 +52,5 @@ LoginView.Proptypes = {
     Username: Proptypes.string,
     Password: Proptypes.string
   }),
-  onLoggedIn: Proptypes.func,
-  toggleRegister: Proptypes.func
+  onLoggedIn: Proptypes.func
 };

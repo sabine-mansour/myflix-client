@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Proptypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import "./registration-view.scss";
 
@@ -14,14 +16,20 @@ export function RegistrationView(props) {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday)
-    props.onRegister(username);
+    console.log(username, password, email, birthday);
+    axios.post('https://flixinfo.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    }).then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self');
+    }).catch(e => {
+      console.log('error registering the user')
+    });
   }
-
-  const toggleRegister = (e) => {
-    e.preventDefault();
-    props.toggleRegister();
-  };
 
   return (
     <Form>
@@ -46,7 +54,10 @@ export function RegistrationView(props) {
       </Form.Group>
 
       <Button variant="primary" type="submit" onClick={handleRegister}>Register</Button>
-      <Button variant="outline-primary" onClick={toggleRegister}>Already Registered? Log In</Button>
+
+      <Link to={`/`}>
+        <Button variant="outline-primary">Already Registered? Log In</Button>
+      </Link>
     </Form>
   );
 }
@@ -58,6 +69,5 @@ RegistrationView.Proptypes = {
     Email: Proptypes.string,
     Birthday: Proptypes.string
   }),
-  onRegister: Proptypes.func,
-  toggleRegister: Proptypes.func
+  onRegister: Proptypes.func
 };

@@ -16,7 +16,7 @@ export class MovieCard extends React.Component {
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
           <Link to={`/movies/${movie._id}`}>
-            <Button onClick={() => { onMovieClick(movie) }} variant="outline-primary">Open</Button>
+            <Button variant="outline-primary">Open</Button>
           </Link>
         </Card.Body>
       </Card>
@@ -27,6 +27,5 @@ export class MovieCard extends React.Component {
 MovieCard.proptypes = {
   movie: Proptypes.shape({
     Title: Proptypes.string
-  }).isRequired,
-  onMovieClick: Proptypes.func.isRequired
+  }).isRequired
 };
