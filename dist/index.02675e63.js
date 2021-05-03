@@ -26753,7 +26753,7 @@ try {
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
           path: "/movies/:movieId",
-          render: ({match}) => {
+          render: ({match, history}) => {
             if (!user) return (
               /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapColDefault.default, {
                 md: 6,
@@ -26813,7 +26813,7 @@ try {
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
           path: "/directors/:name",
-          render: ({match}) => {
+          render: ({match, history}) => {
             if (!user) return (
               /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapColDefault.default, {
                 md: 6,
@@ -26855,6 +26855,7 @@ try {
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_directorViewDirectorView.DirectorView, {
                 director: movies.find(m => m.Director.Name === match.params.name).Director,
+                onBackClick: () => history.goBack(),
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
@@ -26872,7 +26873,7 @@ try {
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
           path: "/genres/:name",
-          render: ({match}) => {
+          render: ({match, history}) => {
             if (!user) return (
               /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapColDefault.default, {
                 md: 6,
@@ -26914,6 +26915,7 @@ try {
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_genreViewGenreView.GenreView, {
                 genre: movies.find(m => m.Genre.Name === match.params.name).Genre,
+                onBackClick: () => history.goBack(),
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
@@ -34830,7 +34832,7 @@ try {
             columnNumber: 11
           }
         }, movie.Description)), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
-          to: `/directors/{$movie.Director.Name}`,
+          to: `/directors/${movie.Director.Name}`,
           __self: this,
           __source: {
             fileName: _jsxFileName,
@@ -34846,7 +34848,7 @@ try {
             columnNumber: 11
           }
         }, movie.Director.Name)), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
-          to: `/genres/{$movie.Genre.Name}`,
+          to: `/genres/${movie.Genre.Name}`,
           __self: this,
           __source: {
             fileName: _jsxFileName,
@@ -34864,7 +34866,7 @@ try {
         }, movie.Genre.Name)), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
           variant: "secondary",
           onClick: () => {
-            onBackClick(null);
+            onBackClick();
           },
           __self: this,
           __source: {
