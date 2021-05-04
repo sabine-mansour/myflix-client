@@ -4,6 +4,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
 
 export class ProfileView extends React.Component {
 
@@ -11,7 +12,6 @@ export class ProfileView extends React.Component {
     super();
     this.state = {
       username: "",
-      password: "",
       email: "",
       birthday: "",
       favoriteMovies: [],
@@ -26,9 +26,8 @@ export class ProfileView extends React.Component {
   getUser() {
     this.setState({
       username: localStorage.getItem("user"),
-      password: localStorage.getItem("password"),
       email: localStorage.getItem("email"),
-      birthday: localStorage.getItem("birthday"),
+      birthday: localStorage.getItem('birthday'),
       favoriteMovies: localStorage.getItem("favoriteMovies"),
     });
   }
@@ -45,6 +44,8 @@ export class ProfileView extends React.Component {
       })
       .then((response) => {
         console.log(response);
+        let favMovies = response.data.FavoriteMovies;
+        localStorage.setItem('favoriteMovies', favMovies);
         this.componentDidMount();
       });
   }
@@ -68,7 +69,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies } = this.props;
+    const { movies, onBackClick } = this.props;
     const favoriteMovieList = movies.filter((movie) => {
       return this.state.favoriteMovies.includes(movie._id);
     });
@@ -90,12 +91,14 @@ export class ProfileView extends React.Component {
           <Link to={`/update/${this.state.username}`}>
             <Button>Edit Profile</Button>
           </Link>
+          <Button variant="warning" onClick={() => { this.handleDelete() }}>Delete Profile</Button>
+          <Button variant="secondary" onClick={() => { onBackClick() }}>Back</Button>
         </Form>
         <div>
           <h5>Favorite Movies:</h5>
           {favoriteMovieList.map((movie) => {
             return (
-              <div key={movie._id}>
+              <Col md={3} key={movie._id}>
                 <Card>
                   <Card.Img variant="top" src={movie.ImagePath} />
                   <Card.Body>
@@ -107,7 +110,7 @@ export class ProfileView extends React.Component {
                 <Button onClick={() => this.removeFavorite(movie)}>
                   Remove
                       </Button>
-              </div>
+              </Col>
             );
           })}
         </div>

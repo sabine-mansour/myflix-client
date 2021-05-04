@@ -14,6 +14,8 @@ export function ProfileUpdate(props) {
   const [passwordError, setPasswordError] = useState({});
   const [emailError, setEmailError] = useState({});
 
+  const onBackClick = props.onBackClick;
+
   const handleUpdate = (e) => {
     e.preventDefault();
 
@@ -42,6 +44,8 @@ export function ProfileUpdate(props) {
         .then((response) => {
           const data = response.data;
           localStorage.setItem("user", data.Username);
+          localStorage.setItem('email', data.Email);
+          localStorage.setItem('birthday', data.Birthday);
           alert("Your profile was updated successfully");
           window.open("/", "_self");
         })
@@ -119,10 +123,8 @@ export function ProfileUpdate(props) {
         <Form.Group>
           <Form.Label>Date of Birth:</Form.Label>
           <Form.Control
-            type="date"
+            type="text"
             value={birthday}
-            placeholder="Select Birthday"
-            required
             onChange={(e) => setBirthday(e.target.value)}
           />
         </Form.Group>
@@ -152,6 +154,7 @@ export function ProfileUpdate(props) {
             Update
           </Button>
         </Link>
+        <Button variant="secondary" onClick={onBackClick}>Back</Button>
       </Form>
     </div>
   );
