@@ -48,7 +48,6 @@ export class MainView extends React.Component {
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    localStorage.setItem('password', authData.user.Password);
     localStorage.setItem('email', authData.user.Email);
     localStorage.setItem('birthday', authData.user.Birthday);
     localStorage.setItem('favoriteMovies', authData.user.FavoriteMovies)
@@ -68,8 +67,7 @@ export class MainView extends React.Component {
   }
 
   logOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.clear();
     this.setState({
       user: null,
     });
@@ -95,7 +93,7 @@ export class MainView extends React.Component {
             </Link>
             <Link to={`/users/${user}`}>
               <Button variant="link" className="navbar-link">
-                My Account
+                My Profile
                     </Button>
             </Link>
 
@@ -160,7 +158,7 @@ export class MainView extends React.Component {
               </Col>
             }} />
 
-            <Route path="/users/:userId" render={({ match, history }) => {
+            <Route path="/users/:userId" render={({ history }) => {
               if (!user) return <Col md={6}>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
@@ -168,11 +166,12 @@ export class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
 
               return <Col md={8}>
-                <ProfileView movies={movies} /></Col>
+                <ProfileView movies={movies} onBackClick={() => history.goBack()} />
+              </Col>
 
             }} />
 
-            <Route path="/update/:userId" render={({ match, history }) => {
+            <Route path="/update/:userId" render={({ history }) => {
               if (!user) return <Col md={6}>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
@@ -180,7 +179,7 @@ export class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
 
               return <Col md={8}>
-                <ProfileUpdate movies={movies} /></Col>
+                <ProfileUpdate movies={movies} onBackClick={() => history.goBack()} /></Col>
 
             }} />
 
