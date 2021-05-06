@@ -21,10 +21,14 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
+<<<<<<< Updated upstream
+    "react-dom": "^17.0.2"
+=======
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.1.0",
+    "redux": "^4.1.0"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.0-beta.2"
