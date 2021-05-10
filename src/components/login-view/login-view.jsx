@@ -3,6 +3,7 @@ import Proptypes from 'prop-types';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import { Link } from 'react-router-dom';
 
 
@@ -52,37 +53,43 @@ export function LoginView(props) {
     return isValid;
   };
   return (
+    <div className="registration-block">
+      <h2>Sign In</h2>
+      <Form>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+        </Form.Group>
+        {Object.keys(usernameError).map((key) => {
+          return (
+            <div key={key} style={{ color: "red" }}>
+              {usernameError[key]}
+            </div>
+          );
+        })}
 
-    <Form>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
-      </Form.Group>
-      {Object.keys(usernameError).map((key) => {
-        return (
-          <div key={key} style={{ color: "red" }}>
-            {usernameError[key]}
-          </div>
-        );
-      })}
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+        </Form.Group>
+        {Object.keys(passwordError).map((key) => {
+          return (
+            <div key={key} style={{ color: "red" }}>
+              {usernameError[key]}
+            </div>
+          );
+        })}
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-      </Form.Group>
-      {Object.keys(passwordError).map((key) => {
-        return (
-          <div key={key} style={{ color: "red" }}>
-            {usernameError[key]}
-          </div>
-        );
-      })}
+        <ButtonToolbar className="justify-content-between">
 
-      <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-      <Link to={`/register`}>
-        <Button variant="outline-primary" >Not Registered? Register</Button>
-      </Link>
-    </Form>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+          <Link to={`/register`}>
+            <Button variant="outline-primary" >Not Registered? Register</Button>
+          </Link>
+        </ButtonToolbar>
+      </Form>
+
+    </div>
 
   );
 }

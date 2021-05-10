@@ -5,6 +5,11 @@ import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import "./profile-view.scss";
 
 export class ProfileView extends React.Component {
 
@@ -73,46 +78,57 @@ export class ProfileView extends React.Component {
     const favoriteMovieList = movies.filter((movie) => {
       return this.state.favoriteMovies.includes(movie._id);
     });
+    if (this.state.birthday === 'undefined') {
+      this.state.birthday = 'N/A';
+    }
     return (
-      <div>
+      <div className="profile-view">
+        <h2>My Profile</h2>
         <Form>
           <Form.Group controlId="formBasicUsername">
-            <h6>Username: </h6>
+            <h5>Username</h5>
             <Form.Label>{this.state.username}</Form.Label>
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
-            <h6>Email:</h6>
+            <h5>Email</h5>
             <Form.Label>{this.state.email}</Form.Label>
           </Form.Group>
           <Form.Group controlId="formBasicDate">
-            <h6>Date of Birth:</h6>
+            <h5>Date of Birth</h5>
             <Form.Label>{this.state.birthday}</Form.Label>
           </Form.Group>
-          <Link to={`/update/${this.state.username}`}>
-            <Button>Edit Profile</Button>
-          </Link>
-          <Button variant="warning" onClick={() => { this.handleDelete() }}>Delete Profile</Button>
-          <Button variant="secondary" onClick={() => { onBackClick() }}>Back</Button>
+          <ButtonToolbar>
+            <ButtonGroup className="mr-5">
+              <Link to={`/update/${this.state.username}`}>
+                <Button>Edit Profile</Button>
+              </Link>
+            </ButtonGroup>
+            <ButtonGroup className="mr-3">
+              <Button variant="danger" onClick={() => { this.handleDelete() }}>Delete Profile</Button>
+            </ButtonGroup>
+          </ButtonToolbar>
         </Form>
-        <div>
-          <h5>Favorite Movies:</h5>
-          {favoriteMovieList.map((movie) => {
-            return (
-              <Col md={3} key={movie._id}>
-                <Card>
-                  <Card.Img variant="top" src={movie.ImagePath} />
-                  <Card.Body>
-                    <Link to={`/movies/${movie._id}`}>
-                      <Card.Title>{movie.Title}</Card.Title>
-                    </Link>
-                  </Card.Body>
-                </Card>
-                <Button onClick={() => this.removeFavorite(movie)}>
-                  Remove
+        <div className="favorite-list">
+          <h5>Favorite Movies</h5>
+          <Container>
+            <Row>
+              {favoriteMovieList.map((movie) => {
+                return (
+                  <Col md={3} key={movie._id}>
+                    <Card className="text-center">
+                      <Link to={`/movies/${movie._id}`}><Card.Img variant="top" src={movie.ImagePath} /></Link>
+                      <Card.Body>
+                        <Button variant="outline-danger" onClick={() => this.removeFavorite(movie)}>
+                          Remove
                       </Button>
-              </Col>
-            );
-          })}
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                );
+              })}
+
+            </Row>
+          </Container>
         </div>
       </div>
     )

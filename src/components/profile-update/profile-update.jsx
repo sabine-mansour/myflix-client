@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -83,8 +84,8 @@ export function ProfileUpdate(props) {
   };
 
   return (
-    <div>
-      <h1>Update your profile</h1>
+    <div className="registration-block">
+      <h2>Update your profile</h2>
       <Form className="registration-form">
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username:</Form.Label>
@@ -145,16 +146,18 @@ export function ProfileUpdate(props) {
             );
           })}
         </Form.Group>
-        <Link to={`/users/`}>
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={handleUpdate}
-          >
-            Update
+        <ButtonToolbar className="justify-content-between">
+          <Link to={`/users/`}>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={handleUpdate}
+            >
+              Update
           </Button>
-        </Link>
-        <Button variant="secondary" onClick={onBackClick}>Back</Button>
+          </Link>
+          <Button variant="secondary" onClick={onBackClick}>Back</Button>
+        </ButtonToolbar>
       </Form>
     </div>
   );

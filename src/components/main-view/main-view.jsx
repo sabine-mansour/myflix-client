@@ -1,16 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button';
 
+import { setMovies } from '../../actions/actions';
+import MoviesList from '../movies-list/movies-list';
+
 import { LoginView } from '../login-view/login-view';
-import { RegistrationView } from '../registration-view/registration-view'
-import { MovieCard } from '../movie-card/movie-card';
+import { RegistrationView } from '../registration-view/registration-view';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -19,13 +24,12 @@ import { ProfileUpdate } from '../profile-update/profile-update';
 
 import "./main-view.scss";
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
   constructor() {
     super();
 
     this.state = {
-      movies: [],
       user: null
     };
   }
@@ -58,9 +62,7 @@ export class MainView extends React.Component {
     axios.get('https://flixinfo.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
     }).then(response => {
-      this.setState({
-        movies: response.data
-      });
+      this.props.setMovies(response.data);
     }).catch(function (error) {
       console.log(error);
     });
@@ -76,28 +78,24 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    let { movies } = this.props;
+    let { user } = this.state;
 
     return (
       <div>
         <Router>
-          <div className="insert-navbar">
-            <Link to={`/`}>
-              <Button
-                variant="link"
-                className="navbar-link"
-                onClick={() => this.logOut()}
-              >
-                Sign Out
-                    </Button>
-            </Link>
-            <Link to={`/users/${user}`}>
-              <Button variant="link" className="navbar-link">
-                My Profile
-                    </Button>
-            </Link>
+          <Navbar bg="dark" variant="dark">
+            <Navbar.Brand href="/">FlixInfo</Navbar.Brand>
+            <Nav className="mr-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href={`/users/${user}`}>My Profile</Nav.Link>
+            </Nav>
+            <Navbar.Collapse className="justify-content-end">
+              <Button className="mr-sm-2" variant="secondary" onClick={() => this.logOut()}>Sign Out</Button>
+            </Navbar.Collapse>
 
-          </div>
+
+          </Navbar>
           <Row className="main-view justify-content-md-center">
 
             <Route exact path='/' render={() => {
@@ -107,11 +105,7 @@ export class MainView extends React.Component {
 
               if (movies.length === 0) return <div className="main-view" />
 
-              return movies.map(m => (
-                <Col md={4} key={m._id} >
-                  <MovieCard movie={m} />
-                </Col>
-              ))
+              return <MoviesList movies={movies} />
             }} />
 
             <Route path="/register" render={() => {
@@ -128,7 +122,7 @@ export class MainView extends React.Component {
 
               if (movies.length === 0) return <div className="main-view" />
 
-              return <Col md={8}>
+              return <Col md={7}>
                 <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
               </Col>
             }} />
@@ -165,10 +159,9 @@ export class MainView extends React.Component {
 
               if (movies.length === 0) return <div className="main-view" />;
 
-              return <Col md={8}>
+              return <Col md={10}>
                 <ProfileView movies={movies} onBackClick={() => history.goBack()} />
               </Col>
-
             }} />
 
             <Route path="/update/:userId" render={({ history }) => {
@@ -189,3 +182,9 @@ export class MainView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies })(MainView);

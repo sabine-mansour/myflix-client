@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Proptypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -66,55 +67,62 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Form>
-      <Form.Group controlId="registerUsername">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
-      </Form.Group>
-      {Object.keys(usernameError).map((key) => {
-        return (
-          <div key={key} style={{ color: "red" }}>
-            {usernameError[key]}
-          </div>
-        );
-      })}
+    <div className="registration-block">
+      <h2>Register</h2>
+      <Form>
+        <Form.Group controlId="registerUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+        </Form.Group>
+        {Object.keys(usernameError).map((key) => {
+          return (
+            <div key={key} style={{ color: "red" }}>
+              {usernameError[key]}
+            </div>
+          );
+        })}
 
-      <Form.Group controlId="registerPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-      </Form.Group>
+        <Form.Group controlId="registerPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+        </Form.Group>
 
-      {Object.keys(passwordError).map((key) => {
-        return (
-          <div key={key} style={{ color: "red" }}>
-            {usernameError[key]}
-          </div>
-        );
-      })}
+        {Object.keys(passwordError).map((key) => {
+          return (
+            <div key={key} style={{ color: "red" }}>
+              {usernameError[key]}
+            </div>
+          );
+        })}
 
-      <Form.Group controlId="registerEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="text" onChange={e => setEmail(e.target.value)} />
-      </Form.Group>
-      {Object.keys(emailError).map((key) => {
-        return (
-          <div key={key} style={{ color: "red" }}>
-            {emailError[key]}
-          </div>
-        );
-      })}
+        <Form.Group controlId="registerEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="text" onChange={e => setEmail(e.target.value)} />
+        </Form.Group>
+        {Object.keys(emailError).map((key) => {
+          return (
+            <div key={key} style={{ color: "red" }}>
+              {emailError[key]}
+            </div>
+          );
+        })}
 
-      <Form.Group controlId="registerBirthday">
-        <Form.Label>Birthdate</Form.Label>
-        <Form.Control type="text" onChange={e => setBirthday(e.target.value)} />
-      </Form.Group>
+        <Form.Group controlId="registerBirthday">
+          <Form.Label>Birthdate</Form.Label>
+          <Form.Control type="text" onChange={e => setBirthday(e.target.value)} />
+        </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={handleRegister}>Register</Button>
+        <ButtonToolbar className="justify-content-between">
 
-      <Link to={`/`}>
-        <Button variant="outline-primary">Already Registered? Log In</Button>
-      </Link>
-    </Form>
+          <Button variant="primary" type="submit" onClick={handleRegister}>Register</Button>
+
+
+          <Link to={`/`}>
+            <Button variant="outline-primary">Already Registered? Log In</Button>
+          </Link>
+        </ButtonToolbar>
+      </Form>
+    </div>
   );
 }
 
