@@ -2,7 +2,12 @@
 
 
 
-
+.photo {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border: 2px solid black;
+}
 .my-flix {
   color: steelblue;
 }
